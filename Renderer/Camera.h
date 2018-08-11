@@ -8,7 +8,7 @@
 class Camera
 {
 public:
-	Camera(const glm::vec3& pos, float fov, float aspect, float zNear, float zFar, float speed)
+	Camera(const glm::vec3& pos, float fov, float aspect, float zNear, float zFar)
 	{
 		m_perspective = glm::perspective(fov, aspect, zNear, zFar);
 		m_position = pos;
@@ -17,7 +17,6 @@ public:
 		m_right = glm::vec3(1, 0, 0);
 		m_target = glm::vec3(0, 0, 0);
 		m_rotation = glm::vec2(0, 0);
-		m_speed = speed;
 		m_radius = 5.0f;
 		m_lookAt = glm::lookAt(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0));
 		m_lookForward = m_lookAt;
@@ -28,8 +27,8 @@ public:
 		return m_perspective * m_lookAt;
 	}
 
-	void Rotate(float mouseX, float mouseY, InputControl& mouseControl, int wheel);
-	void Move(InputControl& forwardControl, InputControl& strafeControl, InputControl& verticalControl);
+	void Rotate(float delta, float mouseX, float mouseY, InputControl& mouseControl, int wheel, float sensitivity);
+	void Move(float delta, InputControl& forwardControl, InputControl& strafeControl, InputControl& verticalControl, float speed);
 
 private:
 	glm::mat4 m_perspective;
@@ -41,6 +40,5 @@ private:
 	glm::vec3 m_right;
 	glm::vec3 m_target;
 	glm::vec2 m_rotation;
-	float m_speed;
 	float m_radius;
 };
