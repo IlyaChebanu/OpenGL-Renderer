@@ -16,18 +16,15 @@ Shader::Shader(const std::string& fileName)
 	for (unsigned int i = 0; i < NUM_SHADERS; i++)
 		glAttachShader(m_program, m_shaders[i]);
 
-	glBindAttribLocation(m_program, 0, "position"); // Allows us to use "attribute vec3 position;" in the shader.
-	glBindAttribLocation(m_program, 1, "texCoord");
-	glBindAttribLocation(m_program, 2, "normal");
+	//glBindAttribLocation(m_program, 0, "normal");
+	//glBindAttribLocation(m_program, 1, "position");
+	//glBindAttribLocation(m_program, 2, "texCoord");
 
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: Program linking failed");
 
 	glValidateProgram(m_program);
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Program is invalid");
-
-	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform"); // Finds where the transform uniform is stored
-	m_uniforms[VIEW_U] = glGetUniformLocation(m_program, "view");
 }
 
 
@@ -47,11 +44,11 @@ void Shader::Bind()
 	glUseProgram(m_program);
 }
 
-void Shader::Update(const Transform& transform, Camera& camera) 
-{
-	glm::mat4 mvp = camera.GetViewProjection() * transform.GetModel();
-	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &mvp[0][0]);
-}
+//void Shader::Update(const Transform& transform, Camera& camera) 
+//{
+//	glm::mat4 mvp = camera.GetViewProjection() * transform.GetModel();
+//	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &mvp[0][0]);
+//}
 
 static GLuint CreateShader(const std::string& text, GLenum shaderType)
 {

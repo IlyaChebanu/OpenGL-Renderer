@@ -11,19 +11,32 @@ public:
 	Shader(const std::string& fileName);
 
 	void Bind(); // Set the GPU to use our shaders
-	void Update(const Transform& transform, Camera& camera); // Update uniforms to some values
+
+	inline void setUniformInt(const std::string& name, int value) const
+	{
+		glUniform1i(glGetUniformLocation(m_program, name.c_str()), value);
+	}
+	void setUniformFloat(const std::string& name, float value) const
+	{
+		glUniform1i(glGetUniformLocation(m_program, name.c_str()), value);
+	}
+	void setUniformBool(const std::string& name, bool value) const
+	{
+		glUniform1i(glGetUniformLocation(m_program, name.c_str()), (int)value);
+	}
+	void setUniformMat4(const std::string& name, const glm::mat4 &mat) const
+	{
+		glUniformMatrix4fv(glGetUniformLocation(m_program, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+	}
 
 	virtual ~Shader();
 
 private:
 	static const unsigned int NUM_SHADERS = 2;
-	Shader(const Shader& other) {};
-	Shader& operator=(const Shader& other) {};
 
 	enum
 	{
 		TRANSFORM_U,
-		VIEW_U,
 
 		NUM_UNIFORMS
 	};
