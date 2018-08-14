@@ -17,6 +17,7 @@ public:
 		m_right = glm::vec3(1, 0, 0);
 		m_target = glm::vec3(0, 0, 0);
 		m_rotation = glm::vec2(0, 0);
+		m_pos = glm::vec3(0, 0, 0);
 		m_radius = 5.0f;
 		m_lookAt = glm::lookAt(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0));
 		m_lookForward = m_lookAt;
@@ -25,6 +26,11 @@ public:
 	inline glm::mat4 GetViewProjection()
 	{
 		return m_perspective * m_lookAt;
+	}
+
+	inline glm::vec3 GetPos()
+	{
+		return m_pos;
 	}
 
 	void Rotate(float delta, float mouseX, float mouseY, InputControl& mouseControl, int wheel, float sensitivity);
@@ -38,6 +44,7 @@ private:
 	glm::vec3 m_up;
 	glm::vec3 m_right;
 	glm::vec3 m_target;
+	glm::vec3 m_pos;
 	glm::vec2 m_rotation;
 	float m_radius;
 };

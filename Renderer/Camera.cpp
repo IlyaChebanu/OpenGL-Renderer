@@ -27,6 +27,8 @@ void Camera::Rotate(float delta, float dX, float dY, InputControl& mouseControl,
 	m_up = glm::vec4(0, 1, 0, 1) * rotation;
 	m_forward = glm::vec4(0, 0, 1, 1) * rotation;
 	m_right = glm::vec4(1, 0, 0, 1) * rotation;
+
+	m_pos = glm::vec4(0, 0, -m_radius, 1) * rotation;
 }
 
 void Camera::Move(float delta, InputControl& forwardControl, InputControl& strafeControl, InputControl& verticalControl, float speed)

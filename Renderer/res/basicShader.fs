@@ -1,27 +1,36 @@
-//#version 120
-//
-//varying vec2 texCoord0; // Shared between shaders and interpolated
-//varying vec3 normal0;
-//
-//uniform sampler2D diffuse; // Both CPU and GPU have access to uniforms
-//
-//varying vec3 myColour;
-//
-//void main()
-//{
-//	//gl_FragColor = texture2D(diffuse, texCoord0) * clamp(dot(-vec3(0.7,-0.7,1), normal0), 0.1, 1.0);
-//}
-
 #version 330 core
 out vec4 FragColor;
 
 in vec2 TexCoords;
 in vec3 Normal;
+in vec3 FragPos;
 
 uniform sampler2D texture_diffuse1;
+uniform vec3 lightPos;
+uniform vec3 lightColor;
+uniform vec3 viewPos;
 
 void main()
 {    
-	FragColor = texture(texture_diffuse1, TexCoords) * clamp(dot(-vec3(0.7,-0.7,1), Normal), 0.1, 1.0);
-    //FragColor = texture(texture_diffuse1, TexCoords);
+	float ambientStrength = 0.1;
+	vec3 ambient = ambientStrength * lightColor;
+	
+	vec3 norm = normalize(Normal);
+	vec3 lightDir = normalize(lightPos - FragPos);
+	
+	float diff = max(dot(norm, lightDir), 0.0); // Gets rid of negative values
+	vec3 diffuse = diff * lightColor;
+	
+	float specularStrength = 1;
+	vec3 viewDir = normalize(viewPos - FragPos);
+	vec3 reflectDir = reflect(lightDir, norm);
+	int shininess = 64;
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0), shininess);
+	vec3 specular = specularStrength * spec * lightColor;
+	
+	vec3 result = ambient + diffuse + specular;
+	
+	FragColor = texture(texture_diffuse1, TexCoords) * vec4(result, 1.0);
+	
+	//FragColor = texture(texture_diffuse1, TexCoords) * clamp(dot(lightPos, Normal), 0.1, 1.0);
 }
