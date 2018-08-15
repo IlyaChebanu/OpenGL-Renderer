@@ -30,7 +30,13 @@ void main()
 	
 	vec3 result = ambient + diffuse + specular;
 	
-	FragColor = texture(texture_diffuse1, TexCoords) * vec4(result, 1.0);
-	
-	//FragColor = texture(texture_diffuse1, TexCoords) * clamp(dot(lightPos, Normal), 0.1, 1.0);
+	vec4 textureColour = texture(texture_diffuse1, TexCoords);
+	if (textureColour != vec4(0.0, 0.0, 0.0, 1.0))
+	{
+		FragColor = texture(texture_diffuse1, TexCoords) * vec4(result, 1.0);
+	}
+	else
+	{
+		FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+	}
 }

@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /Renderer/res/s15
+/Renderer/res/sponza
