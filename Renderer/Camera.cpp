@@ -25,15 +25,13 @@ void Camera::Rotate(float delta, float dX, float dY, InputControl& mouseControl,
 	m_lookAt = glm::translate(glm::vec3(0, 0, -m_radius)) * rotation * glm::translate(-m_target) * m_lookForward;
 
 	m_up = glm::vec4(0, 1, 0, 1) * rotation;
-	m_forward = glm::vec4(0, 0, 1, 1) * rotation;
+	m_forward = glm::vec4(0, 0, -1, 1) * rotation;
 	m_right = glm::vec4(1, 0, 0, 1) * rotation;
-
-	m_pos = glm::vec4(0, 0, -m_radius, 1) * rotation;
 }
 
 void Camera::Move(float delta, InputControl& forwardControl, InputControl& strafeControl, InputControl& verticalControl, float speed)
 {
-	m_target += m_forward * speed * forwardControl.getAmt() * delta;
+	m_target -= m_forward * speed * forwardControl.getAmt() * delta;
 	m_target += m_right * speed * strafeControl.getAmt() * delta;
 	m_target += m_up * speed * verticalControl.getAmt() * delta;
 }

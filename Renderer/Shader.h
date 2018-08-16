@@ -18,7 +18,7 @@ public:
 	}
 	void setUniformFloat(const std::string& name, float value) const
 	{
-		glUniform1i(glGetUniformLocation(m_program, name.c_str()), value);
+		glUniform1f(glGetUniformLocation(m_program, name.c_str()), value);
 	}
 	void setUniformBool(const std::string& name, bool value) const
 	{

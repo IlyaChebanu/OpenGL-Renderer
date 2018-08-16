@@ -30,7 +30,22 @@ public:
 
 	inline glm::vec3 GetPos()
 	{
-		return m_pos;
+		return m_target;
+	}
+
+	inline glm::vec3 GetUp()
+	{
+		return m_up;
+	}
+
+	inline glm::vec3 GetForward()
+	{
+		return m_forward;
+	}
+
+	inline glm::vec3 GetRight()
+	{
+		return m_right;
 	}
 
 	void Rotate(float delta, float mouseX, float mouseY, InputControl& mouseControl, int wheel, float sensitivity);

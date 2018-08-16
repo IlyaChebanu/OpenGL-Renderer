@@ -261,3 +261,7 @@ __pycache__/
 *.pyc
 /Renderer/res/s15
 /Renderer/res/sponza
+/Renderer/res/models/aventador
+/Renderer/res/models/nanosuit
+/Renderer/res/models/s15
+/Renderer/res/models/sponza
