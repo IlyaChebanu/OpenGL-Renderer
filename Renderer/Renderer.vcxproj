@@ -99,7 +99,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
@@ -151,38 +151,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Display.h" />
-    <ClInclude Include="IEventHandler.h" />
-    <ClInclude Include="InputControl.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="obj_loader.h" />
-    <ClInclude Include="Shader.h" />
+    <ClInclude Include="core\Display.h" />
+    <ClInclude Include="input\IEventHandler.h" />
+    <ClInclude Include="input\InputControl.h" />
+    <ClInclude Include="rendering\Camera.h" />
+    <ClInclude Include="rendering\Mesh.h" />
+    <ClInclude Include="rendering\Model.h" />
+    <ClInclude Include="rendering\Shader.h" />
+    <ClInclude Include="rendering\Transform.h" />
+    <ClInclude Include="rendering\ViewEventHandler.h" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Transform.h" />
-    <ClInclude Include="ViewEventHandler.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="core\Display.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Display.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="obj_loader.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="rendering\Camera.cpp" />
+    <ClCompile Include="rendering\Mesh.cpp" />
+    <ClCompile Include="rendering\Model.cpp" />
+    <ClCompile Include="rendering\Shader.cpp" />
+    <ClCompile Include="rendering\ViewEventHandler.cpp" />
     <ClCompile Include="stb_image.c">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="ViewEventHandler.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
